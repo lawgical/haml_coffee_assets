@@ -18,7 +18,7 @@ module HamlCoffeeAssets::ActionView
           template = self
 
           # Here's the patch: if the javascript runtime throws an error
-          # during compilation, we get to this handler but our view 
+          # during compilation, we get to this handler but our view
           # doesn't have a lookup_context - thus throwing a very hard
           # to debug error in Template#refresh. To circumvent, ensure the
           # view responds to lookup_context before refreshing.
@@ -29,8 +29,10 @@ module HamlCoffeeAssets::ActionView
 
           if ::Rails::VERSION::STRING < "4"
             raise ::ActionView::Template::Error.new(template, assigns, e)
-          else
+          elsif if ::Rails::VERSION::STRING < "5"
             raise ::ActionView::Template::Error.new(template, e)
+          else
+            raise ::ActionView::Template::Error.new(template)
           end
         end
       end
