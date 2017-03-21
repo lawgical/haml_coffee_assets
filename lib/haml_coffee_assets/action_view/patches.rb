@@ -29,7 +29,7 @@ module HamlCoffeeAssets::ActionView
 
           if ::Rails::VERSION::STRING < "4"
             raise ::ActionView::Template::Error.new(template, assigns, e)
-          elsif if ::Rails::VERSION::STRING < "5"
+          elsif ::Rails::VERSION::STRING < "5"
             raise ::ActionView::Template::Error.new(template, e)
           else
             raise ::ActionView::Template::Error.new(template)
